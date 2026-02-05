@@ -33,7 +33,7 @@ To facilitate the observation of suitability for multiple species over time and 
 
 ``` {r}
 # install.packages("remotes")
-# remotes::install_github("b-cubed-eu/virtual-suitability-cube")
+# remotes::install_github("b-cubed-eu/vscube")
 
 ``` 
 
