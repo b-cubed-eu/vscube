@@ -6,12 +6,8 @@ output: github_document
 
 
 ```{r setup-dev, include=FALSE}
-# Use development sources while knitting (avoids stale installed copy)
-if (requireNamespace("devtools", quietly = TRUE)) {
-  devtools::load_all(quiet = TRUE)
-} else {
-  library(vscube)
-}
+# library
+library(vscube)
 ```
 
 
