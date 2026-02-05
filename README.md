@@ -173,9 +173,11 @@ data frame with the key columns (`scientificName`, `decimalLatitude`,
 `decimalLongitude`, `year`) filtered by year range and removing NAs.
 
 ``` r
-file <- here::here("inst", "occurrence.txt")
-occ <- vsc_read_occurrences(file,
-year_min = 2000, year_max = 2010)
+occ <- vsc_read_occurrences(
+  example_file(),
+  year_min = 2000,
+  year_max = 2010
+  )
 head(occ)
 #>         scientificName decimalLatitude decimalLongitude year
 #> 1  Anemone nemorosa L.        52.09306          6.27293 2007
@@ -432,5 +434,6 @@ p_cell
 ```
 
 <img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+
 
 
