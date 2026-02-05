@@ -28,7 +28,7 @@ analyzed, making them ideal for studying species suitability.
 
 ``` r
 # install.packages("remotes")
-# remotes::install_github("b-cubed-eu/virtual-suitability-cube")
+# remotes::install_github("b-cubed-eu/vscube")
 ```
 
 ## Download WorldClim predictors for May (Netherlands)
@@ -430,3 +430,4 @@ p_cell
 ```
 
 <img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+
