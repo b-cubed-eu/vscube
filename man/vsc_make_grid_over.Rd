@@ -25,7 +25,7 @@ the grid by a target cellsize or by number of cells per side.
 }
 \examples{
 \dontrun{
-cl_bel <- vsc_build_worldclim("BEL", month = 5)
-grd <- vsc_make_grid_over(cl_bel$predictors, n = c(50, 50))
+cl_bel = vsc_build_worldclim("BEL", month = 5)
+grd = vsc_make_grid_over(cl_bel$predictors, n = c(50, 50))
 }
 }

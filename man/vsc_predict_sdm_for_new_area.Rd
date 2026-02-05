@@ -2,32 +2,24 @@
 % Please edit documentation in R/vsc_predict_sdm_for_new_area.R
 \name{vsc_predict_sdm_for_new_area}
 \alias{vsc_predict_sdm_for_new_area}
-\title{Predict SDMs for a new area using previously trained models}
+\title{Project trained maxnet models to a new area}
 \usage{
-vsc_predict_sdm_for_new_area(
-  models,
-  new_stack,
-  predict_fun = enmSdmX::predictEnmSdm,
-  verbose = TRUE
-)
+vsc_predict_sdm_for_new_area(models, new_stack)
 }
 \arguments{
-\item{models}{Named list of fitted models (e.g., from
-\code{vsc_create_sdm_for_species_list()}), one per species.}
+\item{models}{Named list of fitted maxnet models, e.g. the output of
+\code{\link[=vsc_create_sdm_for_species_list]{vsc_create_sdm_for_species_list()}}$models. Each element name should be
+the species name.}
 
-\item{new_stack}{A \code{SpatRaster} with environmental predictors for the new area.}
-
-\item{predict_fun}{Function used to perform the prediction. Default:
-\code{enmSdmX::predictEnmSdm}. It must accept arguments (model, new_stack)
-and return a \code{SpatRaster}.}
-
-\item{verbose}{Logical; print progress messages. Default \code{TRUE}.}
+\item{new_stack}{A \code{terra::SpatRaster} with the predictor layers required by
+the models. Layer names should match the variables used in training.}
 }
 \value{
-A \code{stars} object with attribute \code{"suit"} and dimensions \code{x}, \code{y}, \code{species}.
+A \code{stars} object with attribute \code{"suit"} and dimensions \code{x}, \code{y},
+and \code{species}. One layer per species.
 }
 \description{
-Applies a list of fitted models (one per species) to a new \code{SpatRaster}
-of predictors, returning a \code{stars} cube with a \code{species} dimension
-and a single \code{suit} attribute.
+Applies a list of trained \strong{maxnet} models (one per species) to a new
+predictor stack (SpatRaster) and returns a \code{stars} cube with attribute
+\code{"suit"} and dimension \code{"species"}.
 }
