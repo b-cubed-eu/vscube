@@ -2,7 +2,7 @@
 % Please edit documentation in R/vsc_create_sdm_for_species_list.R
 \name{vsc_create_sdm_for_species_list}
 \alias{vsc_create_sdm_for_species_list}
-\title{Train MaxEnt models and predict suitability for a list of species}
+\title{Train MaxEnt-like SDMs for each species (pure R maxnet backend)}
 \usage{
 vsc_create_sdm_for_species_list(
   species_list,
@@ -13,33 +13,19 @@ vsc_create_sdm_for_species_list(
 )
 }
 \arguments{
-\item{species_list}{A named list of data.frames (one per species) with columns
-\code{decimalLatitude} and \code{decimalLongitude} in lon/lat (EPSG:4326).}
+\item{species_list}{list of data.frames, one per species (from split_species_data)}
 
-\item{stack_clima}{A \code{SpatRaster} with environmental predictors (same extent/CRS used for all species).}
+\item{stack_clima}{SpatRaster of predictors for the training area/month}
 
-\item{background_points}{Integer number of background samples per species (default 10000).}
+\item{background_points}{integer number of background points}
 
-\item{predictors}{Optional character vector: layer names to use as predictors. Default: all layers.}
+\item{predictors}{character vector of predictor layer names (defaults to all)}
 
-\item{verbose}{Logical; if \code{TRUE}, prints progress messages.}
+\item{verbose}{logical}
 }
 \value{
-A list with two named lists:
-\itemize{
-\item \code{models}: fitted MaxEnt models per species.
-\item \code{predictions}: \code{SpatRaster} predictions per species.
-}
+list(models = \if{html}{\out{<list of maxnet models>}}, predictions = \if{html}{\out{<list of SpatRaster>}})
 }
 \description{
-For each species in \code{species_list}, trains a MaxEnt model (\code{enmSdmX::trainMaxEnt})
-using presence-background data derived from \code{stack_clima}, then predicts suitability.
-}
-\examples{
-\dontrun{
-cl <- vsc_build_worldclim("NLD", month = 5)
-occ <- vsc_read_occurrences("occurrence.txt")
-sp  <- split_species_data(occ)
-res <- vsc_create_sdm_for_species_list(sp, cl$predictors, background_points = 5000)
-}
+Train MaxEnt-like SDMs for each species (pure R maxnet backend)
 }
