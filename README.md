@@ -55,6 +55,7 @@ library(terra)
 library(stars)
 library(ggplot2)
 library(viridis)
+library(here)
 ```
 
 ``` r
@@ -172,7 +173,8 @@ data frame with the key columns (`scientificName`, `decimalLatitude`,
 `decimalLongitude`, `year`) filtered by year range and removing NAs.
 
 ``` r
-occ <- vsc_read_occurrences("data/occurrence.txt",
+file <- here::here("inst", "occurrence.txt")
+occ <- vsc_read_occurrences(file,
 year_min = 2000, year_max = 2010)
 head(occ)
 #>         scientificName decimalLatitude decimalLongitude year
@@ -430,4 +432,5 @@ p_cell
 ```
 
 <img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+
 
