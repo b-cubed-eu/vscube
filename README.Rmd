@@ -119,11 +119,12 @@ names(cl_nld$stars)
 Together with climatic predictors, occurrences are needed: `vsc_read_occurrences()` ingests a GBIF TSV/TXT and returns a cleaned data frame with the key columns (`scientificName`, `decimalLatitude`, `decimalLongitude`, `year`) filtered by year range and removing NAs.
 
 ``` {r, echo = TRUE, eval = TRUE}
-file <- here::here("inst", "occurrence.txt")
-occ <- vsc_read_occurrences(file,
-year_min = 2000, year_max = 2010)
+occ <- vsc_read_occurrences(
+  example_file(),
+  year_min = 2000,
+  year_max = 2010
+  )
 head(occ)
-
 ``` 
 
 The example contains 5 species of flowers in Flanders. 
