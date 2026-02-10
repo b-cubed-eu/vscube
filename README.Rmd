@@ -28,16 +28,11 @@ Species Distribution Models (**SDMs**) are tools that use environmental and spec
 
 To facilitate the observation of suitability for multiple species over time and space, we developed a framework that uses **Data Cubes**, multidimensional arrays that organize data in a structured way. The goal of `vscube` is to outline the steps to create a stars object, which includes three dimensions: **time**, **space** (represented as grid cells), and **species**, with suitability as the main attribute. Stars objects can be sliced, aggregated along one of the dimensions, and analyzed, making them ideal for studying species suitability.
 
-
-
-
 ``` {r}
 # install.packages("remotes")
 # remotes::install_github("b-cubed-eu/vscube")
 
 ``` 
-
-
 
 ## Download WorldClim predictors for May (Netherlands)
 
@@ -51,7 +46,6 @@ It returns a list with three elements:
 * `$vars_kept`: a character vector with the successfully downloaded variables
 
 In this example we build May (`month = 5`) climatic predictors for the Netherlands (`"NLD"`).
-
 
 ```  {r, echo = TRUE, warning = FALSE, message = FALSE}
 # load packages 
@@ -74,7 +68,9 @@ str(cl_nld, max.level = 1)
 # Show which variables were successfully downloaded
 cl_nld$vars_kept
 ``` 
+
 ### First output: SpatRaster with predictors
+
 ```{r plot-predictors, eval=TRUE, echo=TRUE, fig.width=6, fig.height=5}
 terra::plot(cl_nld$predictors, col = viridis(100))
 ```
@@ -103,8 +99,8 @@ ggplot(df_tmin, aes(x, y, fill = tmin)) +
 ``` 
 
 ### Second output: stars data cube 
-A `stars` Data Cube with predictors as attributes and x, y, t as dimensions
 
+A `stars` Data Cube with predictors as attributes and x, y, t as dimensions
 
 ``` {r, echo = TRUE, eval = TRUE}
 # The full stars cube contains all 12 months for each variable
@@ -114,6 +110,7 @@ cl_nld$stars
 st_dimensions(cl_nld$stars)
 names(cl_nld$stars)
 ``` 
+
 ## Read and prepare occurrences
 
 Together with climatic predictors, occurrences are needed: `vsc_read_occurrences()` ingests a GBIF TSV/TXT and returns a cleaned data frame with the key columns (`scientificName`, `decimalLatitude`, `decimalLongitude`, `year`) filtered by year range and removing NAs.
@@ -128,7 +125,6 @@ head(occ)
 ``` 
 
 The example contains 5 species of flowers in Flanders. 
-
 
 ## Split occurrences by species
 
@@ -146,8 +142,8 @@ names(sp_list)
 ``` 
 
 ## Train SDMs (MaxEnt) for multiple species
-The function `vsc_create_sdm_for_species_list()` trains a MaxEnt model for each species in your list (the output of `split_species_data()`), using a common stack of environmental predictors (e.g., the May predictors you built with `vsc_build_worldclim()`).
 
+The function `vsc_create_sdm_for_species_list()` trains a MaxEnt model for each species in your list (the output of `split_species_data()`), using a common stack of environmental predictors (e.g., the May predictors you built with `vsc_build_worldclim()`).
 
 The function: 
 
@@ -164,7 +160,6 @@ Returns a list with:
 * `$predictions`: suitability rasters (`SpatRaster`) for the training area (one per species).
 
 Note that this is not meant to have an ecological relevance: the purpose is to show the data cube structure with suitability values. 
-
 
 ``` {r, echo = TRUE, eval = TRUE}
 # Train MaxEnt for each species
@@ -186,15 +181,12 @@ names(sdms$models)[1:5]
 terra::plot(terra::rast(sdms$predictions), col = mako(100))
 ``` 
 
-
 ## Project trained models to a new area (same month/variables)
 
 What this does:
 * Builds WorldClim predictors for the new target area (here: Belgium, May)
 * Applies each traine model to the new predictor stack
 * Returns a `stars` cube with attribute `suit` and dimension `species`.
-
-
 
 ``` {r, echo = TRUE, eval = TRUE}
 # Build predictors for the new area (Belgium, month = 5)
@@ -220,6 +212,7 @@ pred_bel # stars object with attribute "suit"
 ``` 
 
 ## Aggregate species suitability into a polygon grid
+
 After predicting habitat suitability for each species over the new area (Belgium), we can summarize those high-resolution maps into a regular grid.
 This step serves three main purposes:
 
@@ -263,6 +256,7 @@ names(agg_bel)
 vsc_plot_raster_with_grid(cl_bel$predictors[[1]], grid_bel)
 
 ``` 
+
 ## Inspect species suitability for a specific location
 
 Once the aggregated cube is ready, you can zoom in on a single grid cell — for example, the one containing Brussels — to see how all modeled species perform there.
