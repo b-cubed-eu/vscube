@@ -3,10 +3,7 @@
 
 # Virtual Suitability Cube
 
-<!-- badges: start -->
 [![DOI](https://zenodo.org/badge/874847418.svg)](https://doi.org/10.5281/zenodo.19595931)
-
-<!-- badges: end -->
 
 **Species suitability** refers to how favorable an environment is for a
 species to survive, reproduce, and grow in a specific area and time. It
